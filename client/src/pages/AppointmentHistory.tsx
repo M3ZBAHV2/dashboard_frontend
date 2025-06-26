@@ -153,7 +153,7 @@ export default function AppointmentHistory() {
     const matchesPhone = phoneSearch === "" || 
       appointment.customerPhone.includes(phoneSearch);
     
-    const matchesDealership = selectedDealership === "" || 
+    const matchesDealership = selectedDealership === "" || selectedDealership === "all" || 
       appointment.dealer === selectedDealership;
 
     return matchesSearch && matchesPhone && matchesDealership;
@@ -220,7 +220,7 @@ export default function AppointmentHistory() {
                     <SelectValue placeholder="Dealership" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">All Dealerships</SelectItem>
+                    <SelectItem value="all">All Dealerships</SelectItem>
                     {dealerships.map((dealer) => (
                       <SelectItem key={dealer} value={dealer}>{dealer}</SelectItem>
                     ))}
