@@ -17,6 +17,12 @@ import RolePermission from "@/pages/admin/RolePermission";
 import SmsLogs from "@/pages/admin/SmsLogs";
 import PendingSms from "@/pages/admin/PendingSms";
 import GeneralSettings from "@/pages/settings/GeneralSettings";
+import AppointmentForm from "@/pages/AppointmentForm";
+import AppointmentHistory from "@/pages/AppointmentHistory";
+import MyStatistics from "@/pages/MyStatistics";
+import CallHistory from "@/pages/CallHistory";
+import ScheduleShift from "@/pages/ScheduleShift";
+import RCAgentActivity from "@/pages/RCAgentActivity";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -26,6 +32,12 @@ function Router() {
         <Route path="/" component={Dashboard} />
         <Route path="/dealer-info" component={DealerInfo} />
         <Route path="/dealer-notification" component={DealerNotification} />
+        <Route path="/appointment/create" component={AppointmentForm} />
+        <Route path="/appointment/history" component={AppointmentHistory} />
+        <Route path="/my-statistics" component={MyStatistics} />
+        <Route path="/call-history" component={CallHistory} />
+        <Route path="/schedule-shift" component={ScheduleShift} />
+        <Route path="/rc-agent-activity" component={RCAgentActivity} />
         <Route path="/admin/dealer-list" component={DealerList} />
         <Route path="/admin/employee-list" component={EmployeeList} />
         <Route path="/admin/department-list" component={DepartmentList} />

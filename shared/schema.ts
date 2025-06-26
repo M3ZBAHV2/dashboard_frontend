@@ -1,4 +1,4 @@
-import { pgTable, text, serial, integer, boolean, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, integer, boolean, timestamp, date } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -69,6 +69,34 @@ export const pendingSms = pgTable("pending_sms", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
+export const appointments = pgTable("appointments", {
+  id: serial("id").primaryKey(),
+  agentName: text("agent_name").notNull(),
+  customerName: text("customer_name"),
+  customerPhone: text("customer_phone"),
+  dealer: text("dealer"),
+  appointmentDate: date("appointment_date"),
+  appointmentTime: text("appointment_time"),
+  type: text("type").default("Appointment"),
+  status: text("status").default("scheduled"),
+  createdAt: timestamp("created_at").defaultNow(),
+  lastAppointmentTime: timestamp("last_appointment_time"),
+});
+
+export const calls = pgTable("calls", {
+  id: serial("id").primaryKey(),
+  agentName: text("agent_name").notNull(),
+  customerName: text("customer_name"),
+  customerPhone: text("customer_phone"),
+  dealer: text("dealer"),
+  callDate: date("call_date"),
+  callTime: text("call_time"),
+  duration: text("duration"),
+  result: text("result"),
+  lastCallAt: timestamp("last_call_at"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
 export const insertUserSchema = createInsertSchema(users).pick({
   username: true,
   password: true,
@@ -104,6 +132,16 @@ export const insertRoleSchema = createInsertSchema(roles).omit({
   createdAt: true,
 });
 
+export const insertAppointmentSchema = createInsertSchema(appointments).omit({
+  id: true,
+  createdAt: true,
+});
+
+export const insertCallSchema = createInsertSchema(calls).omit({
+  id: true,
+  createdAt: true,
+});
+
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
 export type Dealer = typeof dealers.$inferSelect;
@@ -120,3 +158,7 @@ export type Role = typeof roles.$inferSelect;
 export type InsertRole = z.infer<typeof insertRoleSchema>;
 export type SmsLog = typeof smsLogs.$inferSelect;
 export type PendingSms = typeof pendingSms.$inferSelect;
+export type Appointment = typeof appointments.$inferSelect;
+export type InsertAppointment = z.infer<typeof insertAppointmentSchema>;
+export type Call = typeof calls.$inferSelect;
+export type InsertCall = z.infer<typeof insertCallSchema>;

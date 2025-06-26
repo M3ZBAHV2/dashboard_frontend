@@ -34,11 +34,23 @@ const navItems = [
 ];
 
 const profileItems = [
-  { href: "/profile/settings", label: "Profile Settings" },
+  { href: "/appointment/history", label: "Appointment History" },
+  { href: "/my-statistics", label: "My Stats" },
+  { href: "/call-history", label: "Call History" },
+  { href: "/schedule-shift", label: "Schedule & Shift" },
+  { href: "/rc-agent-activity", label: "RC - Agent Activity" },
 ];
 
 const managerItems = [
-  { href: "/manager/dashboard", label: "Manager Dashboard" },
+  { href: "/admin/dealer-list", label: "Dealer List" },
+  { href: "/admin/employee-list", label: "User List" },
+  { href: "/admin/department-list", label: "Department List" },
+  { href: "/admin/scenario-list", label: "Scenario List" },
+  { href: "/admin/lead-source", label: "Lead Source" },
+  { href: "/admin/dealership-logins", label: "Dealership Logins" },
+  { href: "/admin/role-permission", label: "Role & Permission" },
+  { href: "/admin/sms-logs", label: "Sms & Logs" },
+  { href: "/admin/pending-sms", label: "Pending Sms" },
 ];
 
 const adminItems = [
