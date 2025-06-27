@@ -28,7 +28,6 @@ interface SidebarProps {
 }
 
 const navItems = [
-  { href: "/", label: "Leaderboard", icon: BarChart3 },
   { href: "/dealer-info", label: "Dealer Info", icon: Info },
   { href: "/dealer-notification", label: "Dealer Notification", icon: Bell },
 ];
@@ -42,6 +41,7 @@ const profileItems = [
 ];
 
 const managerItems = [
+  { href: "/", label: "Dashboard" },
   { href: "/admin/dealer-list", label: "Dealer List" },
   { href: "/admin/employee-list", label: "User List" },
   { href: "/admin/department-list", label: "Department List" },
@@ -73,7 +73,7 @@ const settingsItems = [
 export default function Sidebar({ open, setOpen }: SidebarProps) {
   const [location] = useLocation();
   const [profileOpen, setProfileOpen] = useState(false);
-  const [managerOpen, setManagerOpen] = useState(false);
+  const [managerOpen, setManagerOpen] = useState(true);
   const [adminOpen, setAdminOpen] = useState(true);
   const [settingsOpen, setSettingsOpen] = useState(false);
 

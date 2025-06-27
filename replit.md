@@ -91,6 +91,8 @@ The application is configured for Replit deployment with:
 ✓ Built RC Agent Activity page with agent selection and activity metrics
 ✓ Updated navigation and routing for all new pages
 ✓ Enhanced data models with appointment and call schemas
+✓ Created comprehensive Manager Dashboard with 7 data tables and 8 summary cards
+✓ Reorganized navigation: renamed "Leaderboard" to "Dashboard" and moved it as first item under Manager section
 
 ## User Preferences
 
