@@ -3,177 +3,321 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Calendar, Clock, User, Settings } from "lucide-react";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { User, Lock, Calendar, Eye, EyeOff } from "lucide-react";
+import { useLocation } from "wouter";
+
+type TabType = "schedule" | "password" | "profile";
 
 export default function ScheduleShift() {
-  const [scheduleData, setScheduleData] = useState({
-    schedule: "",
-    day: "Monday",
-    startTime: "",
-    endTime: "",
-    lunchStartTime: "",
-    lunchEndTime: "",
-  });
+  const [activeTab, setActiveTab] = useState<TabType>("schedule");
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  
+  // Password form state
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  
+  // Profile form state
+  const [name, setName] = useState("Admin Admin");
+  const [email, setEmail] = useState("manager@truebdc.com");
+  const [phone, setPhone] = useState("+1659202819");
 
-  const handleInputChange = (field: string, value: string) => {
-    setScheduleData(prev => ({ ...prev, [field]: value }));
-  };
-
-  const days = [
-    "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
-  ];
-
-  return (
+  const renderScheduleContent = () => (
     <div className="space-y-6">
-      <Card>
-        <CardHeader>
-          <div className="flex items-center gap-2">
-            <Settings className="h-5 w-5" />
-            <div>
-              <CardTitle>Schedule & Shift</CardTitle>
-              <div className="text-sm text-gray-500 mt-1">
-                Dashboard / Schedule & Shift
-              </div>
+      <div>
+        <h3 className="text-lg font-semibold mb-4">Schedule</h3>
+        <div className="bg-gray-100 p-4 rounded-lg">
+          <p className="text-gray-600">Select your schedule</p>
+        </div>
+      </div>
+      
+      <div>
+        <h3 className="text-lg font-semibold mb-4">Shift</h3>
+        <Table className="border">
+          <TableHeader>
+            <TableRow className="bg-gray-50">
+              <TableHead className="text-center">Day</TableHead>
+              <TableHead className="text-center">Start Time</TableHead>
+              <TableHead className="text-center">End Time</TableHead>
+              <TableHead className="text-center">Lunch Start Time</TableHead>
+              <TableHead className="text-center">Lunch End Time</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {/* Empty table rows to match screenshot */}
+            <TableRow>
+              <TableCell colSpan={5} className="text-center py-8 text-gray-500">
+                No schedule data available
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+        
+        <div className="flex justify-end mt-4">
+          <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+            Change Schedule & Shift
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderPasswordContent = () => (
+    <div className="space-y-6">
+      <h3 className="text-lg font-semibold">Change Password</h3>
+      
+      <div className="space-y-4 max-w-md">
+        <div>
+          <Label htmlFor="current-password">Current Password</Label>
+          <div className="relative">
+            <Input
+              id="current-password"
+              type={showCurrentPassword ? "text" : "password"}
+              placeholder="Enter current password"
+              value={currentPassword}
+              onChange={(e) => setCurrentPassword(e.target.value)}
+              className="pr-10"
+            />
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+              onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+            >
+              {showCurrentPassword ? (
+                <EyeOff className="h-4 w-4" />
+              ) : (
+                <Eye className="h-4 w-4" />
+              )}
+            </Button>
+          </div>
+        </div>
+
+        <div>
+          <Label htmlFor="new-password">New Password</Label>
+          <div className="relative">
+            <Input
+              id="new-password"
+              type={showNewPassword ? "text" : "password"}
+              placeholder="Enter new password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              className="pr-10"
+            />
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+              onClick={() => setShowNewPassword(!showNewPassword)}
+            >
+              {showNewPassword ? (
+                <EyeOff className="h-4 w-4" />
+              ) : (
+                <Eye className="h-4 w-4" />
+              )}
+            </Button>
+          </div>
+        </div>
+
+        <div>
+          <Label htmlFor="confirm-password">Confirm New Password</Label>
+          <div className="relative">
+            <Input
+              id="confirm-password"
+              type={showConfirmPassword ? "text" : "password"}
+              placeholder="Confirm your new password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className="pr-10"
+            />
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            >
+              {showConfirmPassword ? (
+                <EyeOff className="h-4 w-4" />
+              ) : (
+                <Eye className="h-4 w-4" />
+              )}
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-gray-50 p-4 rounded-lg max-w-md">
+        <h4 className="font-medium mb-2">Password requirements:</h4>
+        <p className="text-sm text-gray-600 mb-2">Ensure that these requirements are met:</p>
+        <ul className="text-sm text-gray-600 space-y-1">
+          <li className="flex items-center gap-2">
+            <span className="w-2 h-2 bg-gray-400 rounded-full"></span>
+            Lowercase & Uppercase
+          </li>
+          <li className="flex items-center gap-2">
+            <span className="w-2 h-2 bg-gray-400 rounded-full"></span>
+            Number (0-9)
+          </li>
+          <li className="flex items-center gap-2">
+            <span className="w-2 h-2 bg-gray-400 rounded-full"></span>
+            Special Character (!@#$%^&*)
+          </li>
+          <li className="flex items-center gap-2">
+            <span className="w-2 h-2 bg-gray-400 rounded-full"></span>
+            Atleast 8 Characters
+          </li>
+        </ul>
+      </div>
+
+      <div className="flex justify-end">
+        <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+          Change Password
+        </Button>
+      </div>
+    </div>
+  );
+
+  const renderProfileContent = () => (
+    <div className="space-y-6">
+      <h3 className="text-lg font-semibold">Basic Info</h3>
+      
+      <div className="space-y-6 max-w-md">
+        <div className="text-center">
+          <Label>Profile</Label>
+          <div className="mt-2 flex justify-center">
+            <div className="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center">
+              <div className="text-white text-2xl">👤</div>
             </div>
           </div>
-        </CardHeader>
-        <CardContent>
-          <Tabs defaultValue="profile-setting" className="w-full">
-            <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="profile-setting" className="flex items-center gap-2">
-                <User className="h-4 w-4" />
-                Profile Setting
-              </TabsTrigger>
-              <TabsTrigger value="change-password" className="flex items-center gap-2">
-                <Settings className="h-4 w-4" />
-                Change Password
-              </TabsTrigger>
-              <TabsTrigger value="schedule-shift" className="flex items-center gap-2">
-                <Calendar className="h-4 w-4" />
-                Schedule & Shift
-              </TabsTrigger>
-            </TabsList>
-            
-            <TabsContent value="profile-setting" className="space-y-6 mt-6">
-              <div className="text-center py-8">
-                <p className="text-gray-500">Profile settings will be available here.</p>
-              </div>
-            </TabsContent>
+        </div>
 
-            <TabsContent value="change-password" className="space-y-6 mt-6">
-              <div className="text-center py-8">
-                <p className="text-gray-500">Password change form will be available here.</p>
-              </div>
-            </TabsContent>
+        <div className="space-y-4">
+          <div>
+            <Label htmlFor="name">Name</Label>
+            <Input
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="mt-1"
+            />
+          </div>
 
-            <TabsContent value="schedule-shift" className="space-y-6 mt-6">
-              <div className="bg-white rounded-lg border p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-6">Schedule & Shift</h3>
-                
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                  {/* Left Column - Schedule Selection */}
-                  <div className="space-y-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="schedule">Schedule</Label>
-                      <Select 
-                        value={scheduleData.schedule} 
-                        onValueChange={(value) => handleInputChange("schedule", value)}
-                      >
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select your schedule" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="full-time">Full Time (9 AM - 5 PM)</SelectItem>
-                          <SelectItem value="part-time">Part Time (12 PM - 6 PM)</SelectItem>
-                          <SelectItem value="custom">Custom Schedule</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
+          <div>
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="mt-1"
+            />
+          </div>
 
-                  {/* Right Column - Daily Schedule */}
-                  <div className="space-y-6">
-                    <h4 className="font-medium text-gray-900">Daily Schedule Configuration</h4>
-                    
-                    <div className="space-y-4">
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <Label htmlFor="day">Day</Label>
-                          <Select 
-                            value={scheduleData.day} 
-                            onValueChange={(value) => handleInputChange("day", value)}
-                          >
-                            <SelectTrigger>
-                              <SelectValue />
-                            </SelectTrigger>
-                            <SelectContent>
-                              {days.map((day) => (
-                                <SelectItem key={day} value={day}>{day}</SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                        </div>
-                      </div>
+          <div>
+            <Label htmlFor="phone">Phone (Optional)</Label>
+            <Input
+              id="phone"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              className="mt-1"
+            />
+          </div>
+        </div>
+      </div>
 
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <Label htmlFor="startTime">Start Time</Label>
-                          <Input
-                            id="startTime"
-                            type="time"
-                            value={scheduleData.startTime}
-                            onChange={(e) => handleInputChange("startTime", e.target.value)}
-                          />
-                        </div>
-                        
-                        <div className="space-y-2">
-                          <Label htmlFor="endTime">End Time</Label>
-                          <Input
-                            id="endTime"
-                            type="time"
-                            value={scheduleData.endTime}
-                            onChange={(e) => handleInputChange("endTime", e.target.value)}
-                          />
-                        </div>
-                      </div>
+      <div className="flex justify-end">
+        <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+          Update Profile
+        </Button>
+      </div>
+    </div>
+  );
 
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <Label htmlFor="lunchStartTime">Lunch Start Time</Label>
-                          <Input
-                            id="lunchStartTime"
-                            type="time"
-                            value={scheduleData.lunchStartTime}
-                            onChange={(e) => handleInputChange("lunchStartTime", e.target.value)}
-                          />
-                        </div>
-                        
-                        <div className="space-y-2">
-                          <Label htmlFor="lunchEndTime">Lunch End Time</Label>
-                          <Input
-                            id="lunchEndTime"
-                            type="time"
-                            value={scheduleData.lunchEndTime}
-                            onChange={(e) => handleInputChange("lunchEndTime", e.target.value)}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+  const getBreadcrumb = () => {
+    switch (activeTab) {
+      case "password":
+        return "Dashboard / Change Password";
+      case "profile":
+        return "Dashboard / My Account";
+      default:
+        return "Dashboard / Schedule & Shift";
+    }
+  };
 
-                <div className="flex justify-end mt-8">
-                  <Button className="bg-primary hover:bg-primary/90 px-8">
-                    Change Schedule & Shift
-                  </Button>
+  return (
+    <div className="flex gap-6">
+      {/* Sidebar */}
+      <div className="w-64 space-y-1">
+        <button
+          onClick={() => setActiveTab("profile")}
+          className={`w-full flex items-center gap-3 px-3 py-2 text-left rounded-lg transition-colors ${
+            activeTab === "profile" 
+              ? "bg-blue-100 text-blue-600" 
+              : "text-gray-600 hover:bg-gray-100"
+          }`}
+        >
+          <User className="h-4 w-4" />
+          Profile Setting
+        </button>
+        
+        <button
+          onClick={() => setActiveTab("password")}
+          className={`w-full flex items-center gap-3 px-3 py-2 text-left rounded-lg transition-colors ${
+            activeTab === "password" 
+              ? "bg-blue-100 text-blue-600" 
+              : "text-gray-600 hover:bg-gray-100"
+          }`}
+        >
+          <Lock className="h-4 w-4" />
+          Change Password
+        </button>
+        
+        <button
+          onClick={() => setActiveTab("schedule")}
+          className={`w-full flex items-center gap-3 px-3 py-2 text-left rounded-lg transition-colors ${
+            activeTab === "schedule" 
+              ? "bg-blue-100 text-blue-600" 
+              : "text-gray-600 hover:bg-gray-100"
+          }`}
+        >
+          <Calendar className="h-4 w-4" />
+          Schedule & Shift
+        </button>
+      </div>
+
+      {/* Main Content */}
+      <div className="flex-1">
+        <Card>
+          <CardHeader>
+            <div className="flex items-center gap-2">
+              {activeTab === "schedule" && <Calendar className="h-5 w-5" />}
+              {activeTab === "password" && <Lock className="h-5 w-5" />}
+              {activeTab === "profile" && <User className="h-5 w-5" />}
+              <div>
+                <CardTitle>
+                  {activeTab === "schedule" && "Schedule & Shift"}
+                  {activeTab === "password" && "Change Password"}
+                  {activeTab === "profile" && "Basic Info"}
+                </CardTitle>
+                <div className="text-sm text-gray-500 mt-1">
+                  {getBreadcrumb()}
                 </div>
               </div>
-            </TabsContent>
-          </Tabs>
-        </CardContent>
-      </Card>
+            </div>
+          </CardHeader>
+          <CardContent>
+            {activeTab === "schedule" && renderScheduleContent()}
+            {activeTab === "password" && renderPasswordContent()}
+            {activeTab === "profile" && renderProfileContent()}
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }

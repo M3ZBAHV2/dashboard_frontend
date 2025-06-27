@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Bell, Menu, ChevronDown, User } from "lucide-react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Bell, Menu, ChevronDown, User, LogOut } from "lucide-react";
 import { useLocation } from "wouter";
 
 interface HeaderProps {
@@ -29,8 +31,17 @@ const pageTitles: Record<string, string> = {
 };
 
 export default function Header({ onMenuClick }: HeaderProps) {
-  const [location] = useLocation();
+  const [location, setLocation] = useLocation();
   const title = pageTitles[location] || "Dashboard";
+
+  const handleProfileClick = () => {
+    setLocation("/schedule-shift");
+  };
+
+  const handleLogout = () => {
+    // Handle logout logic here
+    console.log("Logout clicked");
+  };
 
   return (
     <header className="bg-white shadow-sm border-b border-gray-200 px-6 py-4">
@@ -57,10 +68,25 @@ export default function Header({ onMenuClick }: HeaderProps) {
           <Button variant="ghost" size="sm">
             <Bell className="h-4 w-4 text-gray-400" />
           </Button>
-          <div className="flex items-center space-x-2 cursor-pointer">
-            <User className="h-5 w-5 text-gray-400" />
-            <ChevronDown className="h-4 w-4 text-gray-400" />
-          </div>
+          
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <div className="flex items-center space-x-2 cursor-pointer hover:bg-gray-50 px-2 py-1 rounded">
+                <User className="h-5 w-5 text-gray-400" />
+                <ChevronDown className="h-4 w-4 text-gray-400" />
+              </div>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-48">
+              <DropdownMenuItem onClick={handleProfileClick} className="cursor-pointer">
+                <User className="h-4 w-4 mr-2" />
+                Profile
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
+                <LogOut className="h-4 w-4 mr-2" />
+                Logout
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
     </header>
