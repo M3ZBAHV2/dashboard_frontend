@@ -9,6 +9,7 @@ import DealerInfo from "@/pages/dealer-info/DealerInfo";
 import DealerNotification from "@/pages/dealer-notification/DealerNotification";
 import DealerList from "@/pages/admin/DealerList";
 import AddDealer from "@/pages/admin/AddDealer";
+import AddEmployee from "@/pages/admin/AddEmployee";
 import EmployeeList from "@/pages/admin/EmployeeList";
 import DepartmentList from "@/pages/admin/DepartmentList";
 import ScenarioList from "@/pages/admin/ScenarioList";
@@ -42,6 +43,7 @@ function Router() {
         <Route path="/admin/dealer-list" component={DealerList} />
         <Route path="/admin/dealer-list/create" component={AddDealer} />
         <Route path="/admin/employee-list" component={EmployeeList} />
+        <Route path="/admin/employee-list/create" component={AddEmployee} />
         <Route path="/admin/department-list" component={DepartmentList} />
         <Route path="/admin/scenario-list" component={ScenarioList} />
         <Route path="/admin/lead-source" component={LeadSource} />
