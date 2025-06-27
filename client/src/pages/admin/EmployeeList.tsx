@@ -13,8 +13,8 @@ export default function EmployeeList() {
   const [search, setSearch] = useState("");
   const [entriesPerPage, setEntriesPerPage] = useState("10");
 
-  // Sample data matching the screenshot
-  const employees = [
+  // Sample data matching the screenshot with state management
+  const [employees, setEmployees] = useState([
     { id: 1, name: "Admin Admin", email: "manager@truebdc.com", phone: "+8583282889", status: true },
     { id: 5, name: "Rafael Hossain", email: "rafael@truebdc.com", phone: "+57379428950", status: false },
     { id: 6, name: "Maria Morozova", email: "maria@truebdc.com", phone: "+57304387171", status: true },
@@ -25,7 +25,7 @@ export default function EmployeeList() {
     { id: 11, name: "Santiago Rodom", email: "santiago@truebdc.com", phone: "+573224850181", status: true },
     { id: 12, name: "Santiago Zenizo", email: "santiagozentizo@truebdc.com", phone: "+573344946266", status: false },
     { id: 13, name: "Sam Urisao", email: "samuel@truebdc.com", phone: "+573244278206", status: false },
-  ];
+  ]);
 
   const filteredEmployees = employees.filter(employee =>
     employee.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -33,7 +33,13 @@ export default function EmployeeList() {
   );
 
   const handleStatusToggle = (id: number) => {
-    console.log(`Toggle status for employee ${id}`);
+    setEmployees(prevEmployees => 
+      prevEmployees.map(employee => 
+        employee.id === id 
+          ? { ...employee, status: !employee.status }
+          : employee
+      )
+    );
   };
 
   return (

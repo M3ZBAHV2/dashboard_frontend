@@ -13,8 +13,8 @@ export default function DealerList() {
   const [search, setSearch] = useState("");
   const [entriesPerPage, setEntriesPerPage] = useState("10");
 
-  // Sample data matching the screenshot
-  const dealers = [
+  // Sample data matching the screenshot with state management
+  const [dealers, setDealers] = useState([
     { id: 1, name: "Downtown Toyota", type: "SALES", timezone: "Pacific Time Zone", status: true },
     { id: 2, name: "Downtown Subaru", type: "SALES/SZS", timezone: "Pacific Time Zone", status: true },
     { id: 3, name: "BMW Mini of Sterling", type: "SALES", timezone: "Eastern Time Zone", status: false },
@@ -25,14 +25,20 @@ export default function DealerList() {
     { id: 8, name: "Navarre Nissan", type: "SALES/SZS", timezone: "Central Time Zone", status: false },
     { id: 9, name: "Glendale Nissan", type: "SALES/SZS", timezone: "Pacific Time Zone", status: false },
     { id: 10, name: "Navarre GMC", type: "SALES", timezone: "Central Time Zone", status: false },
-  ];
+  ]);
 
   const filteredDealers = dealers.filter(dealer =>
     dealer.name.toLowerCase().includes(search.toLowerCase())
   );
 
   const handleStatusToggle = (id: number) => {
-    console.log(`Toggle status for dealer ${id}`);
+    setDealers(prevDealers => 
+      prevDealers.map(dealer => 
+        dealer.id === id 
+          ? { ...dealer, status: !dealer.status }
+          : dealer
+      )
+    );
   };
 
   return (
