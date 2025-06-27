@@ -8,6 +8,7 @@ import Dashboard from "@/pages/dashboard/Dashboard";
 import DealerInfo from "@/pages/dealer-info/DealerInfo";
 import DealerNotification from "@/pages/dealer-notification/DealerNotification";
 import DealerList from "@/pages/admin/DealerList";
+import AddDealer from "@/pages/admin/AddDealer";
 import EmployeeList from "@/pages/admin/EmployeeList";
 import DepartmentList from "@/pages/admin/DepartmentList";
 import ScenarioList from "@/pages/admin/ScenarioList";
@@ -39,6 +40,7 @@ function Router() {
         <Route path="/schedule-shift" component={ScheduleShift} />
         <Route path="/rc-agent-activity" component={RCAgentActivity} />
         <Route path="/admin/dealer-list" component={DealerList} />
+        <Route path="/admin/dealer-list/create" component={AddDealer} />
         <Route path="/admin/employee-list" component={EmployeeList} />
         <Route path="/admin/department-list" component={DepartmentList} />
         <Route path="/admin/scenario-list" component={ScenarioList} />
