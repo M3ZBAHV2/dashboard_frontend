@@ -1,0 +1,47 @@
+Perform a meticulous, exhaustive audit and cleanup on this repository with these strict requirements:
+---
+1. **Dependencies & `package.json`:**
+   - Open `package.json`.
+   - Remove all dependencies, devDependencies, and fields not strictly needed for a standard Node.js + TypeScript + Express backend, React + Vite frontend, and Drizzle ORM. Only keep packages required for these stacks.
+   - Delete any dependency, devDependency, or script referencing "replit", "upm", "nix", "ghostwriter", or any platform/AI-specific tooling.
+   - In scripts, keep only npm-standard commands: e.g., `"dev"`, `"start"`, `"build"`, `"test"`. Remove or rewrite any others to match typical developer workflows.
+   - Remove any custom fields, metadata, or artifacts not found in clean open-source setups.
+
+2. **Config & Platform Traces:**
+   - Delete `.replit`, `replit.nix`, `.upm`, `.config`, or any hidden or visible Replit/platform-specific file or folder.
+   - Remove all config, environment, or database connections designed for Replit usage—leave only standard `.env` and production-friendly config files.
+   - Inside remaining config files, clear out any references or keys mentioning "replit" or similar terms.
+
+3. **Lockfiles & Tooling:**
+   - Ensure only `package-lock.json`, `yarn.lock`, or `pnpm-lock.yaml` (created using npm/yarn/pnpm) are present. Remove any nonstandard lockfiles.
+   - Eliminate any vestigial dependencies or hooks from previous automated setup, including tools left by Replit or automated dependency managers.
+   - Ensure all lockfiles reflect only the required stack and are compatible with an ordinary local build (`npm install`, `yarn install`).
+
+4. **Documentation:**
+   - Scrub all documentation (`README.md`, setup files, comments) for any mention of Replit, AI, platform-specific workflows, or nonstandard cloud platform instructions. Rewrite setup instructions for a standard VS Code, npm/yarn CLI, and localhost deployment process.
+
+5. **Scripts & Environment:**
+   - Make sure all scripts, configs, and environment steps are compatible with developers using VS Code or any mainstream local IDE.
+   - In `.env.example` or related files, remove any platform-generated variables or API keys; provide only typical environment variable templates for local setups.
+
+6. **Source Code and Imports:**
+   - Remove any imports referencing or requiring platform tooling (Replit, upm, or similar).
+   - Check for and remove watermark comments or auto-generated banners in every file.
+   - Only idiomatic, standard code, and comments explaining logic where necessary—not generic or AI-patterned documentation.
+
+7. **Vetting & Verification:**
+   - Do a final project-wide search for "replit", "upm", "nix", "ghostwriter" and variants in all text and configuration files.
+   - Confirm project will work with a clean `git clone`, `npm install`, and VS Code dev environment—no mention or dependency on "Replit" or nonstandard tools remains.
+
+8. **Professional Polish:**
+   - Add or update `.gitignore` for standard Node/React/TypeScript/Vite best practices.
+   - Ensure all instructions and sample code snippets look like they come from a skilled senior developer, without auto-generated or low-quality code artifacts.
+
+9. **Summary of Changes:**
+   - After cleanup, generate a `CLEANUP_REPORT.md` at the project root briefly outlining what was removed or changed (dependency removals, script standardizations, config/file deletions, etc.).
+---
+
+**Result:**  
+The finished project must look indistinguishable from a hand-built VS Code/Node.js/React/TypeScript repository, with no config, dependency, or metadata suggesting Replit, AI, or cloud platform development.
+
+Begin the audit and fix now. Do not skip any detail.
