@@ -1,8 +1,8 @@
-# replit.md
+# Project Documentation
 
 ## Overview
 
-This is a full-stack web application built with React, Express, and TypeScript. The application appears to be a dealership management system called "True BDC" that handles dealers, employees, departments, scenarios, lead sources, and SMS communications. It features a modern UI built with shadcn/ui components and uses Drizzle ORM for database operations.
+This is a full-stack web application built with React, Express, and TypeScript. The application is a dealership management system called "True BDC" that handles dealers, employees, departments, scenarios, lead sources, and SMS communications. It features a modern UI built with shadcn/ui components and uses Drizzle ORM for database operations.
 
 ## System Architecture
 
@@ -64,21 +64,26 @@ The application defines several core entities:
 - **TypeScript**: Type safety across the stack
 - **ESBuild**: Fast JavaScript bundler for production
 
-## Deployment Strategy
+## Development
 
-The application is configured for Replit deployment with:
+### Local Setup
+1. Install dependencies: `npm install`
+2. Configure environment variables in `.env`
+3. Run database migrations: `npm run db:push`
+4. Start development server: `npm run dev`
+
+### Environment Configuration
 - **Development**: `npm run dev` runs both client and server with HMR
 - **Production Build**: Vite builds client assets, ESBuild bundles server
 - **Environment**: PostgreSQL database required via `DATABASE_URL`
-- **Port Configuration**: Server runs on port 5000, exposed on port 80
-- **Auto-scaling**: Configured for Replit's autoscale deployment target
+- **Port Configuration**: Server runs on port 5000
 
 ## Changelog
 
-- June 26, 2025. Initial setup
-- June 26, 2025. Complete leaderboard implementation with appointment and call tabs, data tables, pagination, and filters matching uploaded design
-- June 26, 2025. Added comprehensive appointment management system with form creation, history tracking, and statistics
-- June 26, 2025. Created full feature set including: appointment forms, history tables, statistics dashboard, call logs, schedule management, and agent activity tracking
+- June 26, 2025: Initial setup
+- June 26, 2025: Complete leaderboard implementation with appointment and call tabs, data tables, pagination, and filters matching uploaded design
+- June 26, 2025: Added comprehensive appointment management system with form creation, history tracking, and statistics
+- June 26, 2025: Created full feature set including: appointment forms, history tables, statistics dashboard, call logs, schedule management, and agent activity tracking
 
 ## Recent Changes
 
