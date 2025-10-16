@@ -19,6 +19,7 @@ import {
   KeyRound,
   MessageSquare,
   Clock,
+  Trophy,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -28,6 +29,7 @@ interface SidebarProps {
 }
 
 const navItems = [
+  { href: "/leaderboard", label: "Leaderboard", icon: Trophy },
   { href: "/dealer-info", label: "Dealer Info", icon: Info },
   { href: "/dealer-notification", label: "Dealer Notification", icon: Bell },
 ];

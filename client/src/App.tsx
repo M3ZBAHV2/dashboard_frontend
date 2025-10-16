@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Layout from "@/components/layout/Layout";
 import Dashboard from "@/pages/dashboard/Dashboard";
+import Leaderboard from "@/pages/Leaderboard";
 import DealerInfo from "@/pages/dealer-info/DealerInfo";
 import DealerNotification from "@/pages/dealer-notification/DealerNotification";
 import DealerList from "@/pages/admin/DealerList";
@@ -32,6 +33,7 @@ function Router() {
     <Layout>
       <Switch>
         <Route path="/" component={Dashboard} />
+        <Route path="/leaderboard" component={Leaderboard} />
         <Route path="/dealer-info" component={DealerInfo} />
         <Route path="/dealer-notification" component={DealerNotification} />
         <Route path="/appointment/create" component={AppointmentForm} />
