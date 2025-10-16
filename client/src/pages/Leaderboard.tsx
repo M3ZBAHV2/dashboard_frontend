@@ -27,8 +27,8 @@ export default function Leaderboard() {
   
   const [appointmentType, setAppointmentType] = useState("appointment");
   const [monthAppointmentType, setMonthAppointmentType] = useState("appointment");
-  const [department, setDepartment] = useState("all");
-  const [monthDepartment, setMonthDepartment] = useState("all");
+  const [department, setDepartment] = useState("all-department");
+  const [monthDepartment, setMonthDepartment] = useState("all-department");
   const [date, setDate] = useState<Date>(new Date());
   const [monthDate, setMonthDate] = useState<Date>(new Date());
   
