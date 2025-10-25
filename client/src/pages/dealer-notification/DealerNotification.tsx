@@ -127,23 +127,25 @@ export default function DealerNotification() {
             </Select>
           </div>
 
-          {/* Department */}
-          <div className="space-y-2">
-            <Label>Department</Label>
-            <Select 
-              value={formData.department} 
-              onValueChange={(value) => setFormData(prev => ({...prev, department: value}))}
-            >
-              <SelectTrigger className="w-full" data-testid="select-department">
-                <SelectValue placeholder="Select" />
-              </SelectTrigger>
-              <SelectContent>
-                {departments.map((dept) => (
-                  <SelectItem key={dept} value={dept}>{dept}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+          {/* Department - Only show for Appointment type */}
+          {formType === "appointment" && (
+            <div className="space-y-2">
+              <Label>Department</Label>
+              <Select 
+                value={formData.department} 
+                onValueChange={(value) => setFormData(prev => ({...prev, department: value}))}
+              >
+                <SelectTrigger className="w-full" data-testid="select-department">
+                  <SelectValue placeholder="Select" />
+                </SelectTrigger>
+                <SelectContent>
+                  {departments.map((dept) => (
+                    <SelectItem key={dept} value={dept}>{dept}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          )}
 
           {/* Scenario */}
           <div className="space-y-2">
