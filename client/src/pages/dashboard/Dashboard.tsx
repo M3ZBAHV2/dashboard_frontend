@@ -16,14 +16,14 @@ export default function Dashboard() {
 
   // Summary stats matching the screenshot
   const summaryStats = [
-    { title: "Total Employees", value: "91", icon: <Users className="h-8 w-8" />, color: "bg-yellow-100 text-yellow-600" },
-    { title: "Total Dealers", value: "0/1", icon: <Building2 className="h-8 w-8" />, color: "bg-blue-100 text-blue-600" },
-    { title: "Today Appointments", value: "0", icon: <CalendarCheck className="h-8 w-8" />, color: "bg-green-100 text-green-600" },
-    { title: "Month Appointments", value: "5488", icon: <CalendarDays className="h-8 w-8" />, color: "bg-purple-100 text-purple-600" },
-    { title: "Appt. For Today", value: "0", icon: <CalendarCheck className="h-8 w-8" />, color: "bg-blue-100 text-blue-600" },
-    { title: "Appt. For Tomorrow", value: "0", icon: <CalendarCheck className="h-8 w-8" />, color: "bg-green-100 text-green-600" },
-    { title: "Appt. for 3rd day", value: "0", icon: <CalendarDays className="h-8 w-8" />, color: "bg-purple-100 text-purple-600" },
-    { title: "Appt. for 4th day", value: "0", icon: <CalendarDays className="h-8 w-8" />, color: "bg-purple-100 text-purple-600" },
+    { title: "Total Employees", value: "91", icon: <Users className="h-6 w-6" />, color: "bg-yellow-100 text-yellow-600" },
+    { title: "Total Dealers", value: "0/1", icon: <Building2 className="h-6 w-6" />, color: "bg-blue-100 text-blue-600" },
+    { title: "Today Appointments", value: "0", icon: <CalendarCheck className="h-6 w-6" />, color: "bg-green-100 text-green-600" },
+    { title: "Month Appointments", value: "5488", icon: <CalendarDays className="h-6 w-6" />, color: "bg-purple-100 text-purple-600" },
+    { title: "Appt. For Today", value: "0", icon: <CalendarCheck className="h-6 w-6" />, color: "bg-blue-100 text-blue-600" },
+    { title: "Appt. For Tomorrow", value: "0", icon: <CalendarCheck className="h-6 w-6" />, color: "bg-green-100 text-green-600" },
+    { title: "Appt. for 3rd day", value: "0", icon: <CalendarDays className="h-6 w-6" />, color: "bg-purple-100 text-purple-600" },
+    { title: "Appt. for 4th day", value: "0", icon: <CalendarDays className="h-6 w-6" />, color: "bg-purple-100 text-purple-600" },
   ];
 
   // Sample data matching screenshot
@@ -89,13 +89,13 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {summaryStats.map((stat, index) => (
           <Card key={index} className="border shadow-sm">
-            <CardContent className="p-6">
-              <div className="flex flex-col items-center justify-center text-center space-y-3">
-                <div className="text-3xl font-bold text-gray-900">{stat.value}</div>
-                <div className={`w-14 h-14 rounded-lg ${stat.color} flex items-center justify-center`}>
+            <CardContent className="p-4">
+              <div className="flex flex-col items-center justify-center text-center space-y-2">
+                <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
+                <div className={`w-12 h-12 rounded-lg ${stat.color} flex items-center justify-center`}>
                   {stat.icon}
                 </div>
-                <div className="text-sm font-medium text-gray-600">{stat.title}</div>
+                <div className="text-xs font-medium text-gray-600">{stat.title}</div>
               </div>
             </CardContent>
           </Card>
