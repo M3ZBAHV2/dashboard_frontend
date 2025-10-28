@@ -50,13 +50,6 @@ const managerItems = [
   { href: "/admin/call-history", label: "Call History" },
   { href: "/admin/appointment-export", label: "Appointment Export" },
   { href: "/admin/rc-agent-activity", label: "RC - Agent Activity" },
-  { href: "/admin/department-list", label: "Department List" },
-  { href: "/admin/scenario-list", label: "Scenario List" },
-  { href: "/admin/lead-source", label: "Lead Source" },
-  { href: "/admin/dealership-logins", label: "Dealership Logins" },
-  { href: "/admin/role-permission", label: "Role & Permission" },
-  { href: "/admin/sms-logs", label: "Sms & Logs" },
-  { href: "/admin/pending-sms", label: "Pending Sms" },
 ];
 
 const adminItems = [
