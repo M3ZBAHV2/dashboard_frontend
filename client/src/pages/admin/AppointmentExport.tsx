@@ -62,24 +62,16 @@ export default function AppointmentExport() {
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <div className="flex items-center justify-between">
-            <div>
-              <CardTitle>Appointment / Follow Up Export</CardTitle>
-              <div className="text-sm text-gray-500 mt-1">
-                Dashboard / Appointment Export
-              </div>
+          <div>
+            <CardTitle>Appointment / Follow Up Export</CardTitle>
+            <div className="text-sm text-gray-500 mt-1">
+              Dashboard / Appointment Export
             </div>
-            <Button 
-              onClick={handleExport}
-              className="bg-green-600 hover:bg-green-700 text-white"
-              data-testid="button-export"
-            >
-              Export
-            </Button>
           </div>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="space-y-2">
               <Label htmlFor="agent-filter">All Agent</Label>
               <Select value={selectedAgent} onValueChange={setSelectedAgent}>
@@ -162,6 +154,17 @@ export default function AppointmentExport() {
               </Popover>
             </div>
           </div>
+          
+          <div className="flex justify-end">
+            <Button 
+              onClick={handleExport}
+              className="bg-green-600 hover:bg-green-700 text-white"
+              data-testid="button-export"
+            >
+              Export
+            </Button>
+          </div>
+        </div>
         </CardContent>
       </Card>
     </div>
