@@ -15,6 +15,7 @@ import EmployeeList from "@/pages/admin/EmployeeList";
 import AdminAppointmentHistory from "@/pages/admin/AppointmentHistory";
 import AdminCallHistory from "@/pages/admin/CallHistory";
 import AppointmentExport from "@/pages/admin/AppointmentExport";
+import AdminRCAgentActivity from "@/pages/admin/RCAgentActivity";
 import DepartmentList from "@/pages/admin/DepartmentList";
 import ScenarioList from "@/pages/admin/ScenarioList";
 import LeadSource from "@/pages/admin/LeadSource";
@@ -53,6 +54,7 @@ function Router() {
         <Route path="/admin/appointment-history" component={AdminAppointmentHistory} />
         <Route path="/admin/call-history" component={AdminCallHistory} />
         <Route path="/admin/appointment-export" component={AppointmentExport} />
+        <Route path="/admin/rc-agent-activity" component={AdminRCAgentActivity} />
         <Route path="/admin/department-list" component={DepartmentList} />
         <Route path="/admin/scenario-list" component={ScenarioList} />
         <Route path="/admin/lead-source" component={LeadSource} />
