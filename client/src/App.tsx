@@ -46,6 +46,7 @@ function Router() {
         <Route path="/admin/dealer-list/create" component={AddDealer} />
         <Route path="/admin/employee-list" component={EmployeeList} />
         <Route path="/admin/employee-list/create" component={AddEmployee} />
+        <Route path="/admin/users/create" component={AddEmployee} />
         <Route path="/admin/department-list" component={DepartmentList} />
         <Route path="/admin/scenario-list" component={ScenarioList} />
         <Route path="/admin/lead-source" component={LeadSource} />
