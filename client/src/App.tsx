@@ -14,6 +14,7 @@ import AddEmployee from "@/pages/admin/AddEmployee";
 import EmployeeList from "@/pages/admin/EmployeeList";
 import AdminAppointmentHistory from "@/pages/admin/AppointmentHistory";
 import AdminCallHistory from "@/pages/admin/CallHistory";
+import AppointmentExport from "@/pages/admin/AppointmentExport";
 import DepartmentList from "@/pages/admin/DepartmentList";
 import ScenarioList from "@/pages/admin/ScenarioList";
 import LeadSource from "@/pages/admin/LeadSource";
@@ -51,6 +52,7 @@ function Router() {
         <Route path="/admin/users/create" component={AddEmployee} />
         <Route path="/admin/appointment-history" component={AdminAppointmentHistory} />
         <Route path="/admin/call-history" component={AdminCallHistory} />
+        <Route path="/admin/appointment-export" component={AppointmentExport} />
         <Route path="/admin/department-list" component={DepartmentList} />
         <Route path="/admin/scenario-list" component={ScenarioList} />
         <Route path="/admin/lead-source" component={LeadSource} />
