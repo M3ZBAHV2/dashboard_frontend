@@ -59,7 +59,7 @@ const adminItems = [
   { href: "/admin/scenario-list", label: "Scenario List", icon: Target },
   { href: "/admin/lead-source", label: "Lead Source", icon: Database },
   { href: "/admin/dealership-logins", label: "Dealership Logins", icon: KeyRound },
-  { href: "/admin/role-permission", label: "Role & Permission", icon: KeyRound },
+  { href: "/admin/roles", label: "Role & Permission", icon: KeyRound },
   { href: "/admin/sms-logs", label: "Sms & Logs", icon: MessageSquare },
   { href: "/admin/pending-sms", label: "Pending Sms", icon: Clock },
 ];
