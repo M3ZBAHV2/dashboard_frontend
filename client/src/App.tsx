@@ -20,6 +20,8 @@ import DepartmentList from "@/pages/admin/DepartmentList";
 import ScenarioList from "@/pages/admin/ScenarioList";
 import LeadSource from "@/pages/admin/LeadSource";
 import DealershipLogins from "@/pages/admin/DealershipLogins";
+import AddDealership from "@/pages/admin/AddDealership";
+import EditDealership from "@/pages/admin/EditDealership";
 import RolePermission from "@/pages/admin/RolePermission";
 import SmsLogs from "@/pages/admin/SmsLogs";
 import PendingSms from "@/pages/admin/PendingSms";
@@ -59,6 +61,8 @@ function Router() {
         <Route path="/admin/scenario-list" component={ScenarioList} />
         <Route path="/admin/lead-source" component={LeadSource} />
         <Route path="/admin/dealership-logins" component={DealershipLogins} />
+        <Route path="/admin/dealerships/create" component={AddDealership} />
+        <Route path="/admin/dealerships/:id/edit" component={EditDealership} />
         <Route path="/admin/role-permission" component={RolePermission} />
         <Route path="/admin/sms-logs" component={SmsLogs} />
         <Route path="/admin/pending-sms" component={PendingSms} />
