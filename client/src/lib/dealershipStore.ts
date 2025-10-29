@@ -40,7 +40,9 @@ export const dealershipStore = {
 
   addDealership(dealership: Omit<Dealership, 'id'>): Dealership {
     const dealerships = this.getDealerships();
-    const maxId = dealerships.reduce((max, d) => Math.max(max, d.id), 0);
+    const maxId = dealerships.length > 0 
+      ? dealerships.reduce((max, d) => Math.max(max, d.id), 0)
+      : 0;
     const newDealership = { ...dealership, id: maxId + 1 };
     dealerships.push(newDealership);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(dealerships));
