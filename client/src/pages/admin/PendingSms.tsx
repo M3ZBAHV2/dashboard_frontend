@@ -33,6 +33,14 @@ export default function PendingSms() {
     setCurrentPage(1);
   }, [searchTerm, entriesPerPage]);
 
+  // Clamp current page to valid range when data changes
+  useEffect(() => {
+    const maxPage = Math.max(1, Math.ceil(filteredSms.length / parseInt(entriesPerPage)));
+    if (currentPage > maxPage) {
+      setCurrentPage(maxPage);
+    }
+  }, [smsList.length, filteredSms.length, entriesPerPage, currentPage]);
+
   const loadPendingSms = () => {
     setSmsList(pendingSmsStore.getPendingSms());
   };
