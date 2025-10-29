@@ -33,14 +33,6 @@ export default function PendingSms() {
     setCurrentPage(1);
   }, [searchTerm, entriesPerPage]);
 
-  // Clamp current page to valid range when data changes
-  useEffect(() => {
-    const maxPage = Math.max(1, Math.ceil(filteredSms.length / parseInt(entriesPerPage)));
-    if (currentPage > maxPage) {
-      setCurrentPage(maxPage);
-    }
-  }, [smsList.length, filteredSms.length, entriesPerPage, currentPage]);
-
   const loadPendingSms = () => {
     setSmsList(pendingSmsStore.getPendingSms());
   };
@@ -64,6 +56,14 @@ export default function PendingSms() {
     sms.to.toLowerCase().includes(searchTerm.toLowerCase()) ||
     sms.message.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  // Clamp current page to valid range when data changes
+  useEffect(() => {
+    const maxPage = Math.max(1, Math.ceil(filteredSms.length / parseInt(entriesPerPage)));
+    if (currentPage > maxPage) {
+      setCurrentPage(maxPage);
+    }
+  }, [smsList.length, filteredSms.length, entriesPerPage, currentPage]);
 
   // Pagination
   const totalPages = Math.max(1, Math.ceil(filteredSms.length / parseInt(entriesPerPage)));
