@@ -26,6 +26,11 @@ export default function SmsLogs() {
     loadLogs();
   }, []);
 
+  // Reset to page 1 when search or entries per page changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, entriesPerPage]);
+
   const loadLogs = () => {
     setLogs(smsLogStore.getSmsLogs());
   };
@@ -42,10 +47,11 @@ export default function SmsLogs() {
   );
 
   // Pagination
-  const totalPages = Math.ceil(filteredLogs.length / parseInt(entriesPerPage));
+  const totalPages = Math.max(1, Math.ceil(filteredLogs.length / parseInt(entriesPerPage)));
   const startIndex = (currentPage - 1) * parseInt(entriesPerPage);
   const endIndex = startIndex + parseInt(entriesPerPage);
   const currentLogs = filteredLogs.slice(startIndex, endIndex);
+  const hasResults = filteredLogs.length > 0;
 
   // Truncate long text for table display
   const truncateText = (text: string, maxLength: number = 50) => {
@@ -147,7 +153,11 @@ export default function SmsLogs() {
             {/* Pagination */}
             <div className="flex items-center justify-between">
               <div className="text-sm text-gray-500">
-                Showing {startIndex + 1} to {Math.min(endIndex, filteredLogs.length)} of {filteredLogs.length} entries
+                {hasResults ? (
+                  <>Showing {startIndex + 1} to {Math.min(endIndex, filteredLogs.length)} of {filteredLogs.length} entries</>
+                ) : (
+                  <>Showing 0 to 0 of 0 entries</>
+                )}
               </div>
               
               <div className="flex items-center gap-2">
@@ -155,7 +165,7 @@ export default function SmsLogs() {
                   variant="outline" 
                   size="sm"
                   onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-                  disabled={currentPage === 1}
+                  disabled={currentPage === 1 || !hasResults}
                   data-testid="button-previous"
                 >
                   Previous
@@ -174,7 +184,7 @@ export default function SmsLogs() {
                   variant="outline" 
                   size="sm"
                   onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
-                  disabled={currentPage === totalPages}
+                  disabled={currentPage === totalPages || !hasResults}
                   data-testid="button-next"
                 >
                   Next
