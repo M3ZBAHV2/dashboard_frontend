@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
+import { dealershipStore } from "@/lib/dealershipStore";
 
 // Mock dealers list - in real app, this would come from an API
 const availableDealers = [
@@ -17,29 +18,12 @@ const availableDealers = [
   "Woodbridge Koons",
 ];
 
-// Mock dealership data - in real app, this would come from an API
-const mockDealerships: Record<string, any> = {
-  "4": {
-    id: 4,
-    name: "Downtown Auto Center",
-    email: "Fzalmy@downtownautocenter.com",
-    assignedDealers: ["Downtown Toyota", "Downtown Subaru"],
-  },
-  "5": {
-    id: 5,
-    name: "BMW MINI of Sterling",
-    email: "julius.green@bmwofsterling.com",
-    assignedDealers: ["Sterling BMW", "Sterling MINI"],
-  },
-};
-
 export default function EditDealership() {
   const [, setLocation] = useLocation();
   const [, params] = useRoute("/admin/dealerships/:id/edit");
   const { toast } = useToast();
   
-  const dealershipId = params?.id || "";
-  const existingDealership = mockDealerships[dealershipId];
+  const dealershipId = params?.id ? parseInt(params.id) : 0;
 
   const [formData, setFormData] = useState({
     name: "",
@@ -49,16 +33,25 @@ export default function EditDealership() {
     assignedDealers: [] as string[],
   });
   const [selectedDealer, setSelectedDealer] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
-    if (existingDealership) {
-      setFormData({
-        name: existingDealership.name,
-        email: existingDealership.email,
-        password: "",
-        confirmPassword: "",
-        assignedDealers: existingDealership.assignedDealers || [],
-      });
+    if (dealershipId) {
+      const dealership = dealershipStore.getDealership(dealershipId);
+      if (dealership) {
+        setFormData({
+          name: dealership.name,
+          email: dealership.email,
+          password: "",
+          confirmPassword: "",
+          assignedDealers: dealership.assignedDealers || [],
+        });
+        setNotFound(false);
+      } else {
+        setNotFound(true);
+      }
+      setLoading(false);
     }
   }, [dealershipId]);
 
@@ -74,7 +67,18 @@ export default function EditDealership() {
       return;
     }
 
-    // Here you would normally update to backend
+    const updates: any = {
+      name: formData.name,
+      email: formData.email,
+      assignedDealers: formData.assignedDealers,
+    };
+
+    if (formData.password) {
+      updates.password = formData.password;
+    }
+
+    dealershipStore.updateDealership(dealershipId, updates);
+
     toast({
       title: "Success",
       description: "Dealership updated successfully",
@@ -100,7 +104,15 @@ export default function EditDealership() {
     });
   };
 
-  if (!existingDealership) {
+  if (loading) {
+    return (
+      <div className="p-4">
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
+  if (notFound) {
     return (
       <div className="p-4">
         <p>Dealership not found</p>

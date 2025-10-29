@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
+import { dealershipStore } from "@/lib/dealershipStore";
 
 // Mock dealers list - in real app, this would come from an API
 const availableDealers = [
@@ -41,7 +42,15 @@ export default function AddDealership() {
       return;
     }
 
-    // Here you would normally save to backend
+    dealershipStore.addDealership({
+      name: formData.name,
+      email: formData.email,
+      password: formData.password,
+      showCallLogs: false,
+      status: true,
+      assignedDealers: formData.assignedDealers,
+    });
+
     toast({
       title: "Success",
       description: "Dealership created successfully",

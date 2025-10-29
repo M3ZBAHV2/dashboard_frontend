@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -13,42 +13,26 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
-interface Dealership {
-  id: number;
-  name: string;
-  email: string;
-  showCallLogs: boolean;
-  status: boolean;
-  assignedDealers?: string[];
-}
-
-const initialDealerships: Dealership[] = [
-  { id: 4, name: "Downtown Auto Center", email: "Fzalmy@downtownautocenter.com", showCallLogs: false, status: true, assignedDealers: ["Downtown Toyota", "Downtown Subaru"] },
-  { id: 5, name: "BMW MINI of Sterling", email: "julius.green@bmwofsterling.com", showCallLogs: false, status: true },
-  { id: 6, name: "Creative Automotive Mailing", email: "camus.zunelli@yahoo.com", showCallLogs: false, status: true },
-  { id: 10, name: "Daytona Kia & Mitsubishi", email: "jerome@daytonakia.com", showCallLogs: false, status: true },
-  { id: 11, name: "Sutherlin Nissan of Orlando", email: "BurkeAutomotiveMarketing@gmail.com", showCallLogs: false, status: true },
-  { id: 12, name: "Koons Automotive of Woodbridge", email: "davidszky778@gmail.com", showCallLogs: false, status: true },
-  { id: 13, name: "New Direct CDJR", email: "wefthomas2034@gmail.com", showCallLogs: false, status: true },
-  { id: 14, name: "Gostel Toyota of Bradenton", email: "Sandra@theenlvd.com", showCallLogs: false, status: true },
-  { id: 15, name: "MBI Direct Mail", email: "edimolasb@mbidirectmail.com", showCallLogs: false, status: true },
-  { id: 16, name: "Garden State Honda", email: "n.delgadico@gardenstatenla.com", showCallLogs: false, status: true },
-];
+import { dealershipStore, type Dealership } from "@/lib/dealershipStore";
 
 export default function DealershipLogins() {
   const [, setLocation] = useLocation();
-  const [dealerships, setDealerships] = useState<Dealership[]>(initialDealerships);
+  const [dealerships, setDealerships] = useState<Dealership[]>([]);
   const [entriesPerPage, setEntriesPerPage] = useState("10");
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
+  useEffect(() => {
+    loadDealerships();
+  }, []);
+
+  const loadDealerships = () => {
+    setDealerships(dealershipStore.getDealerships());
+  };
+
   const toggleStatus = (id: number, field: 'status' | 'showCallLogs') => {
-    setDealerships(prev => prev.map(dealership => 
-      dealership.id === id 
-        ? { ...dealership, [field]: !dealership[field] }
-        : dealership
-    ));
+    dealershipStore.toggleField(id, field);
+    loadDealerships();
   };
 
   const handleEdit = (id: number) => {
@@ -56,7 +40,8 @@ export default function DealershipLogins() {
   };
 
   const handleDelete = (id: number) => {
-    setDealerships(prev => prev.filter(dealership => dealership.id !== id));
+    dealershipStore.deleteDealership(id);
+    loadDealerships();
   };
 
   // Filter dealerships based on search
