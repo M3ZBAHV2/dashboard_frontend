@@ -1,44 +1,67 @@
-import { useState } from "react";
-import { Link } from "wouter";
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { MoreHorizontal, Plus } from "lucide-react";
+import { MoreHorizontal, Plus, Eye, Edit, Calendar, Trash2 } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { dealerListStore, type DealerItem } from "@/lib/dealerListStore";
+import { useToast } from "@/hooks/use-toast";
 
 export default function DealerList() {
   const [search, setSearch] = useState("");
   const [entriesPerPage, setEntriesPerPage] = useState("10");
+  const [dealers, setDealers] = useState<DealerItem[]>([]);
+  const [, setLocation] = useLocation();
+  const { toast } = useToast();
 
-  // Sample data matching the screenshot with state management
-  const [dealers, setDealers] = useState([
-    { id: 1, name: "Downtown Toyota", type: "SALES", timezone: "Pacific Time Zone", status: true },
-    { id: 2, name: "Downtown Subaru", type: "SALES/SZS", timezone: "Pacific Time Zone", status: true },
-    { id: 3, name: "BMW Mini of Sterling", type: "SALES", timezone: "Eastern Time Zone", status: false },
-    { id: 4, name: "Navarre Chevrolet & Cadillac", type: "SALES/SZS", timezone: "Central Time Zone", status: false },
-    { id: 5, name: "Navarre Honda", type: "SALES/SZS", timezone: "Central Time Zone", status: false },
-    { id: 6, name: "Navarre Hyundai", type: "SALES/SZS", timezone: "Central Time Zone", status: false },
-    { id: 7, name: "Navarre Jeep Ram Dodge Chrysler", type: "SALES/SZS", timezone: "Central Time Zone", status: false },
-    { id: 8, name: "Navarre Nissan", type: "SALES/SZS", timezone: "Central Time Zone", status: false },
-    { id: 9, name: "Glendale Nissan", type: "SALES/SZS", timezone: "Pacific Time Zone", status: false },
-    { id: 10, name: "Navarre GMC", type: "SALES", timezone: "Central Time Zone", status: false },
-  ]);
+  useEffect(() => {
+    loadDealers();
+  }, []);
+
+  const loadDealers = () => {
+    setDealers(dealerListStore.getDealers());
+  };
 
   const filteredDealers = dealers.filter(dealer =>
     dealer.name.toLowerCase().includes(search.toLowerCase())
   );
 
   const handleStatusToggle = (id: number) => {
-    setDealers(prevDealers => 
-      prevDealers.map(dealer => 
-        dealer.id === id 
-          ? { ...dealer, status: !dealer.status }
-          : dealer
-      )
-    );
+    dealerListStore.toggleStatus(id);
+    loadDealers();
+  };
+
+  const handleEdit = (id: number) => {
+    setLocation(`/admin/dealers/${id}/edit`);
+  };
+
+  const handleView = (id: number) => {
+    toast({
+      title: "View Dealer",
+      description: "View functionality coming soon",
+    });
+  };
+
+  const handleSchedule = (id: number) => {
+    toast({
+      title: "Schedule",
+      description: "Schedule functionality coming soon",
+    });
+  };
+
+  const handleDelete = (id: number) => {
+    if (confirm("Are you sure you want to delete this dealer?")) {
+      dealerListStore.deleteDealer(id);
+      loadDealers();
+      toast({
+        title: "Success",
+        description: "Dealer deleted successfully",
+      });
+    }
   };
 
   return (
@@ -106,25 +129,40 @@ export default function DealerList() {
                 <TableRow key={dealer.id}>
                   <TableCell>{index + 1}</TableCell>
                   <TableCell className="font-medium">{dealer.name}</TableCell>
-                  <TableCell>{dealer.type}</TableCell>
-                  <TableCell>{dealer.timezone}</TableCell>
+                  <TableCell>{dealer.type.join(" ")}</TableCell>
+                  <TableCell>{dealer.timezone || '-'}</TableCell>
                   <TableCell>
                     <Switch
                       checked={dealer.status}
                       onCheckedChange={() => handleStatusToggle(dealer.id)}
                       className="data-[state=checked]:bg-green-500 data-[state=unchecked]:bg-red-500"
+                      data-testid={`switch-status-${dealer.id}`}
                     />
                   </TableCell>
                   <TableCell>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="sm">
+                        <Button variant="ghost" size="sm" data-testid={`button-action-${dealer.id}`}>
                           <MoreHorizontal className="h-4 w-4" />
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
-                        <DropdownMenuItem>Edit</DropdownMenuItem>
-                        <DropdownMenuItem>Delete</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => handleEdit(dealer.id)} data-testid={`menu-edit-${dealer.id}`}>
+                          <Edit className="mr-2 h-4 w-4" />
+                          Edit
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => handleView(dealer.id)} data-testid={`menu-view-${dealer.id}`}>
+                          <Eye className="mr-2 h-4 w-4" />
+                          View
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => handleSchedule(dealer.id)} data-testid={`menu-schedule-${dealer.id}`}>
+                          <Calendar className="mr-2 h-4 w-4" />
+                          Schedule
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => handleDelete(dealer.id)} data-testid={`menu-delete-${dealer.id}`}>
+                          <Trash2 className="mr-2 h-4 w-4" />
+                          Delete
+                        </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </TableCell>

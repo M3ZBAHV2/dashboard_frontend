@@ -10,6 +10,7 @@ import DealerInfo from "@/pages/dealer-info/DealerInfo";
 import DealerNotification from "@/pages/dealer-notification/DealerNotification";
 import DealerList from "@/pages/admin/DealerList";
 import AddDealer from "@/pages/admin/AddDealer";
+import EditDealer from "@/pages/admin/EditDealer";
 import AddEmployee from "@/pages/admin/AddEmployee";
 import EmployeeList from "@/pages/admin/EmployeeList";
 import AdminAppointmentHistory from "@/pages/admin/AppointmentHistory";
@@ -52,6 +53,7 @@ function Router() {
         <Route path="/rc-agent-activity" component={RCAgentActivity} />
         <Route path="/admin/dealer-list" component={DealerList} />
         <Route path="/admin/dealer-list/create" component={AddDealer} />
+        <Route path="/admin/dealers/:id/edit" component={EditDealer} />
         <Route path="/admin/employee-list" component={EmployeeList} />
         <Route path="/admin/employee-list/create" component={AddEmployee} />
         <Route path="/admin/users/create" component={AddEmployee} />
