@@ -18,6 +18,7 @@ export const dealers = pgTable("dealers", {
   crmEmail: text("crm_email"),
   crmSource: text("crm_source"),
   crmUrlType: text("crm_url_type"),
+  crmEmailSubject: text("crm_email_subject"),
   phoneNumbers: text("phone_numbers").array(),
   salesCrmLink: text("sales_crm_link"),
   salesCrmUsername: text("sales_crm_username"),
@@ -42,6 +43,7 @@ export const dealers = pgTable("dealers", {
   faxTransfer: text("fax_transfer"),
   ringCentral: text("ring_central"),
   address: text("address"),
+  hours: text("hours"),
   status: boolean("status").default(true),
   createdAt: timestamp("created_at").defaultNow(),
 });

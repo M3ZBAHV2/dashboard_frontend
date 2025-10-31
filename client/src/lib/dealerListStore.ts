@@ -8,6 +8,7 @@ export interface DealerItem {
   crmEmail?: string;
   crmSource?: string;
   crmUrlType?: string;
+  crmEmailSubject?: string;
   phoneNumbers: string[];
   salesCrmLink?: string;
   salesCrmUsername?: string;
@@ -32,6 +33,7 @@ export interface DealerItem {
   faxTransfer?: string;
   ringCentral?: string;
   address?: string;
+  hours?: string;
   status: boolean;
   createdAt: string;
 }

@@ -16,7 +16,7 @@ const TIMEZONES = [
   "Eastern Time Zone",
 ];
 
-const DEALER_TYPES = ["Sales", "S2S", "Service"];
+const DEALER_TYPES = ["SALES", "S2S", "SERVICE"];
 
 export default function EditDealer() {
   const [, params] = useRoute("/admin/dealers/:id/edit");
@@ -33,6 +33,7 @@ export default function EditDealer() {
     crmEmail: "",
     crmSource: "",
     crmUrlType: "",
+    crmEmailSubject: "",
     phoneNumbers: [],
     salesCrmLink: "",
     salesCrmUsername: "",
@@ -57,6 +58,7 @@ export default function EditDealer() {
     faxTransfer: "",
     ringCentral: "",
     address: "",
+    hours: "",
   });
 
   const [typeDropdownValue, setTypeDropdownValue] = useState("");
@@ -275,6 +277,8 @@ export default function EditDealer() {
               <Label htmlFor="crmEmailSubject">Crm Email Subject</Label>
               <Input
                 id="crmEmailSubject"
+                value={formData.crmEmailSubject || ""}
+                onChange={(e) => handleInputChange("crmEmailSubject", e.target.value)}
                 placeholder="Crm Email Subject"
                 data-testid="input-crm-email-subject"
               />
@@ -589,6 +593,8 @@ export default function EditDealer() {
               <Label htmlFor="hours">Hours</Label>
               <Input
                 id="hours"
+                value={formData.hours || ""}
+                onChange={(e) => handleInputChange("hours", e.target.value)}
                 placeholder="Mon - Sat: 9:30am - 7pm / Sun - 9pm - 7pm"
                 data-testid="input-hours"
               />
