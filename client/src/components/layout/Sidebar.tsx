@@ -22,6 +22,7 @@ import {
   Trophy,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import companyLogo from "@assets/WhatsApp Image 2025-10-14 at 09.32.15_1761927208177.jpeg";
 
 interface SidebarProps {
   open: boolean;
@@ -100,10 +101,12 @@ export default function Sidebar({ open, setOpen }: SidebarProps) {
       >
         {/* Logo */}
         <div className="p-4 border-b border-gray-200">
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-sm">T</span>
-            </div>
+          <div className="flex items-center space-x-3">
+            <img 
+              src={companyLogo} 
+              alt="Company Logo" 
+              className="h-10 w-auto object-contain"
+            />
             <span className="font-semibold text-lg text-gray-800">TrueBDC</span>
           </div>
         </div>

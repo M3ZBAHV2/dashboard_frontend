@@ -8,6 +8,13 @@ True BDC is a full-stack dealership management application designed to help auto
 
 Preferred communication style: Simple, everyday language.
 
+## Branding
+
+- **Company Logo**: Custom logo integrated in sidebar header (top-left corner)
+  - Location: `attached_assets/WhatsApp Image 2025-10-14 at 09.32.15_1761927208177.jpeg`
+  - Display: Height 40px with auto width to maintain aspect ratio
+  - Positioned next to "TrueBDC" text in sidebar
+
 ## System Architecture
 
 ### Frontend Architecture
