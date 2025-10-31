@@ -8,6 +8,46 @@ True BDC is a full-stack dealership management application designed to help auto
 
 Preferred communication style: Simple, everyday language.
 
+## Recent Progress
+
+### Completed Features (October 31, 2025)
+
+**Dealer Management System**
+- ✅ Dealer List page (`/admin/dealer-list`) with complete CRUD operations
+  - Table view with columns: #, Name, Type, Timezone, Status, Action
+  - 3-dot action menu with Edit, View, Schedule, Delete options
+  - Status toggle switches (green=active, red=inactive)
+  - Search and pagination functionality
+  - Create Dealer button for adding new dealers
+- ✅ Edit Dealer page (`/admin/dealers/:id/edit`) with comprehensive form
+  - All dealer information fields (name, website, timezone, etc.)
+  - Multi-select Type field with chip display (SALES, S2S, SERVICE) and individual delete buttons
+  - Time Zone dropdown with 4 timezone options
+  - Dynamic phone number management (Add New Number button + individual delete buttons)
+  - Multiple CRM sections: Sales CRM, Data Mining/S2S CRM, Dealer Id, Service CRM
+  - Transfer numbers configuration (Special Attention, VO-Manager, Sales, Service, Fax, Ring Central)
+  - Address and Hours fields
+  - Full localStorage persistence via dealerListStore
+- ✅ dealerListStore implementation with localStorage persistence
+  - Comprehensive dealer data model with 30+ fields
+  - Seed data for 10 dealers
+  - Full CRUD operations (Create, Read, Update, Delete, Toggle Status)
+
+**Roles & Permissions System**
+- ✅ Role List page with Add Role dialog
+- ✅ Edit Role Permission page with 11 modules and granular permission checkboxes
+
+**SMS Management**
+- ✅ SMS & Logs page with View Message dialog and text wrapping fix
+- ✅ Pending SMS page with View/Delete functionality
+- ✅ Smart pagination across all list pages (handles empty results, auto-adjusts on deletion)
+
+**UI/UX Improvements**
+- ✅ Company logo integration in sidebar (top-left corner)
+- ✅ Consistent design pattern: Card-based layouts with manual table structures
+- ✅ Action dialogs (Add/View) and separate edit pages pattern
+- ✅ Color-coded buttons: Yellow (Edit), Red (Delete), Blue (Primary actions), Green (Add)
+
 ## Branding
 
 - **Company Logo**: Custom logo integrated in sidebar header (top-left corner)
