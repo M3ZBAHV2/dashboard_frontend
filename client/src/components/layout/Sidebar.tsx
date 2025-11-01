@@ -44,7 +44,7 @@ const profileItems = [
 ];
 
 const managerItems = [
-  { href: "/", label: "Dashboard" },
+  { href: "/dashboard", label: "Dashboard" },
   { href: "/admin/dealer-list", label: "Dealer List" },
   { href: "/admin/employee-list", label: "User List" },
   { href: "/admin/appointment-history", label: "Appointment History" },
@@ -78,7 +78,7 @@ export default function Sidebar({ open, setOpen }: SidebarProps) {
   const [settingsOpen, setSettingsOpen] = useState(false);
 
   const isActive = (href: string) => {
-    if (href === "/") return location === "/";
+    if (href === "/dashboard") return location === "/dashboard";
     return location.startsWith(href);
   };
 

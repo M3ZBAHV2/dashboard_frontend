@@ -1,9 +1,10 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, useLocation, Redirect } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Layout from "@/components/layout/Layout";
+import Login from "@/pages/auth/Login";
 import Dashboard from "@/pages/dashboard/Dashboard";
 import Leaderboard from "@/pages/Leaderboard";
 import DealerInfo from "@/pages/dealer-info/DealerInfo";
@@ -41,10 +42,19 @@ import RCAgentActivity from "@/pages/RCAgentActivity";
 import NotFound from "@/pages/not-found";
 
 function Router() {
+  const [location] = useLocation();
+  
+  if (location === "/login") {
+    return <Login />;
+  }
+  
   return (
     <Layout>
       <Switch>
-        <Route path="/" component={Dashboard} />
+        <Route path="/">
+          {() => <Redirect to="/login" />}
+        </Route>
+        <Route path="/dashboard" component={Dashboard} />
         <Route path="/leaderboard" component={Leaderboard} />
         <Route path="/dealer-info" component={DealerInfo} />
         <Route path="/dealer-notification" component={DealerNotification} />
