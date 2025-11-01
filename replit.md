@@ -10,7 +10,7 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Progress
 
-### Completed Features (October 31, 2025)
+### Completed Features (November 1, 2025)
 
 **Dealer Management System**
 - ✅ Dealer List page (`/admin/dealer-list`) with complete CRUD operations
@@ -28,10 +28,24 @@ Preferred communication style: Simple, everyday language.
   - Transfer numbers configuration (Special Attention, VO-Manager, Sales, Service, Fax, Ring Central)
   - Address and Hours fields
   - Full localStorage persistence via dealerListStore
+- ✅ View Dealer page (`/admin/dealers/:id`) with read-only display
+  - Left column: All dealer details (website, type, address, hours, timezone, CRM info, transfer numbers)
+  - Audio player for dealer pronunciation
+  - Right column: Google Maps embed showing dealer location
+  - Accessible from "View" button in 3-dot menu on Dealer List
+- ✅ Schedule & Shift page (`/admin/dealer/:id/schedule-shift`) 
+  - Schedule date picker with calendar popup
+  - Shift configuration with Day, Start Time, End Time, Last Appointment Time
+  - Last Appointment Time displayed with yellow/orange background
+  - "No last appointment time" checkbox option
+  - Copy button for shift details
+  - "Change Schedule & Shift" submit button
+  - Accessible from "Schedule" button in 3-dot menu on Dealer List
 - ✅ dealerListStore implementation with localStorage persistence
   - Comprehensive dealer data model with 30+ fields
   - Seed data for 10 dealers
   - Full CRUD operations (Create, Read, Update, Delete, Toggle Status)
+  - getDealerById method for retrieving single dealer
 
 **Roles & Permissions System**
 - ✅ Role List page with Add Role dialog
