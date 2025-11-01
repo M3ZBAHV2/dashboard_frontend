@@ -9,7 +9,7 @@ interface HeaderProps {
 }
 
 const pageTitles: Record<string, string> = {
-  "/": "Leaderboard",
+  "/dashboard": "Dashboard",
   "/dealer-info": "Dealer Info",
   "/dealer-notification": "Dealer Notification",
   "/appointment/create": "Create Appointment",
@@ -39,8 +39,7 @@ export default function Header({ onMenuClick }: HeaderProps) {
   };
 
   const handleLogout = () => {
-    // Handle logout logic here
-    console.log("Logout clicked");
+    setLocation("/login");
   };
 
   return (
@@ -77,11 +76,11 @@ export default function Header({ onMenuClick }: HeaderProps) {
               </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-48">
-              <DropdownMenuItem onClick={handleProfileClick} className="cursor-pointer">
+              <DropdownMenuItem onClick={handleProfileClick} className="cursor-pointer" data-testid="menu-profile">
                 <User className="h-4 w-4 mr-2" />
                 Profile
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
+              <DropdownMenuItem onClick={handleLogout} className="cursor-pointer" data-testid="menu-logout">
                 <LogOut className="h-4 w-4 mr-2" />
                 Logout
               </DropdownMenuItem>
