@@ -40,17 +40,11 @@ export default function DealerList() {
   };
 
   const handleView = (id: number) => {
-    toast({
-      title: "View Dealer",
-      description: "View functionality coming soon",
-    });
+    setLocation(`/admin/dealers/${id}`);
   };
 
   const handleSchedule = (id: number) => {
-    toast({
-      title: "Schedule",
-      description: "Schedule functionality coming soon",
-    });
+    setLocation(`/admin/dealer/${id}/schedule-shift`);
   };
 
   const handleDelete = (id: number) => {
