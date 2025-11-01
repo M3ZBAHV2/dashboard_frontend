@@ -31,6 +31,7 @@ import RolePermission from "@/pages/admin/RolePermission";
 import SmsLogs from "@/pages/admin/SmsLogs";
 import PendingSms from "@/pages/admin/PendingSms";
 import GeneralSettings from "@/pages/settings/GeneralSettings";
+import RingCentralSettings from "@/pages/settings/RingCentralSettings";
 import AppointmentForm from "@/pages/AppointmentForm";
 import AppointmentHistory from "@/pages/AppointmentHistory";
 import MyStatistics from "@/pages/MyStatistics";
@@ -77,6 +78,7 @@ function Router() {
         <Route path="/admin/sms-logs" component={SmsLogs} />
         <Route path="/admin/pending-sms" component={PendingSms} />
         <Route path="/settings/general" component={GeneralSettings} />
+        <Route path="/settings/ring-central" component={RingCentralSettings} />
         <Route component={NotFound} />
       </Switch>
     </Layout>
