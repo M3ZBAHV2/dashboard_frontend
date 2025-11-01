@@ -70,6 +70,27 @@ Preferred communication style: Simple, everyday language.
   - Blue Update button for saving changes
   - Accessible from Settings section in main sidebar
 
+**Authentication System**
+- ✅ Login Page (`/login`) - Default landing page
+  - TRUE BDC branding with logo and text at top
+  - Two tab options: "Agent Login" and "Dealership Login"
+  - Agent Login tab features:
+    - Email and password input fields
+    - "Remember Me" checkbox
+    - "Forgot Password ?" link
+    - Blue "Login" button
+    - "OR" divider
+    - Google login button option
+  - Dealership Login tab features:
+    - Email and password input fields
+    - "Remember Me" checkbox
+    - Blue "Login" button
+    - No Google login option
+    - No "Forgot Password" link
+  - Password show/hide toggle (eye icon)
+  - Login button navigates to dashboard without authentication (temporary)
+  - Root path "/" redirects to "/login" by default
+
 **UI/UX Improvements**
 - ✅ Company logo integration in sidebar (top-left corner)
 - ✅ Consistent design pattern: Card-based layouts with manual table structures
