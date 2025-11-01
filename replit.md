@@ -56,6 +56,20 @@ Preferred communication style: Simple, everyday language.
 - ✅ Pending SMS page with View/Delete functionality
 - ✅ Smart pagination across all list pages (handles empty results, auto-adjusts on deletion)
 
+**Settings System**
+- ✅ Ring Central Settings page (`/settings/ring-central`)
+  - Left sidebar navigation with General Settings and Ring Central Settings options
+  - Ring Central Settings highlighted with blue phone icon when active
+  - Configuration form with 4 fields in 2-column grid:
+    - Ring central client id
+    - Ring central client secret
+    - Ring central server url
+    - Ring central jwt token
+  - Allow Notifications dropdown (Yes/No options)
+  - Yellow Clear Cache button (top-right)
+  - Blue Update button for saving changes
+  - Accessible from Settings section in main sidebar
+
 **UI/UX Improvements**
 - ✅ Company logo integration in sidebar (top-left corner)
 - ✅ Consistent design pattern: Card-based layouts with manual table structures
