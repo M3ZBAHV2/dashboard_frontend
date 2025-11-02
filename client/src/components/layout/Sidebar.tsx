@@ -107,7 +107,7 @@ export default function Sidebar({ open, setOpen }: SidebarProps) {
               alt="Company Logo" 
               className="h-10 w-auto object-contain"
             />
-            <span className="font-semibold text-lg text-gray-800">TrueBDC</span>
+            <span className="font-semibold text-lg text-gray-800">BDC Professionals</span>
           </div>
         </div>
 

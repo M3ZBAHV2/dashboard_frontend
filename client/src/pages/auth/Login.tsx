@@ -30,8 +30,8 @@ export default function Login() {
         {/* Logo */}
         <div className="flex justify-center items-center mb-8 space-x-2">
           <span className="text-3xl font-bold">
-            <span className="text-blue-600">TRUE</span>
-            <span className="text-blue-600"> BDC</span>
+            <span className="text-blue-600">BDC</span>
+            <span className="text-blue-600"> Professionals</span>
           </span>
           <img src={logoPath} alt="Logo" className="h-10 w-10 rounded-full" />
         </div>
