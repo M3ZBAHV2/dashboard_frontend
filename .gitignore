@@ -71,6 +71,3 @@ $RECYCLE.BIN/
 .next/
 out/
 
-# Platform-specific (optional, can be removed manually)
-.replit
-replit.nix

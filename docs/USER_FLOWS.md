@@ -794,12 +794,4 @@ Admin creates "Team Lead" role:
 - 🔧 Permission checking
 - 🔧 Optimistic UI updates
 
-**Future Enhancements:**
-- 📋 Export data to CSV/Excel
-- 📋 Bulk operations (delete multiple)
-- 📋 Advanced filtering and sorting
-- 📋 Appointment reminders
-- 📋 SMS integration
-- 📋 Email notifications
-- 📋 File uploads (attachments)
-- 📋 Audit logs
+

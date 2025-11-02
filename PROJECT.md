@@ -100,7 +100,6 @@ This document tracks the development progress, architecture decisions, and imple
 ## Branding
 
 - **Company Logo**: Custom logo integrated in sidebar header (top-left corner)
-  - Location: `attached_assets/WhatsApp Image 2025-10-14 at 09.32.15_1761927208177.jpeg`
   - Display: Height 40px with auto width to maintain aspect ratio
   - Positioned next to "TrueBDC" text in sidebar
 
@@ -127,7 +126,6 @@ This document tracks the development progress, architecture decisions, and imple
 **Path Aliases**
 - `@/`: Maps to `client/src/` for frontend code
 - `@shared/`: Maps to `shared/` for shared types and schemas
-- `@assets/`: Maps to `attached_assets/` for static assets
 
 ### Backend Architecture
 
@@ -161,38 +159,6 @@ This document tracks the development progress, architecture decisions, and imple
 - **Vite Middleware Mode**: Serves frontend during development with HMR
 - **Static File Serving**: Production builds served from `dist/public`
 - **Build Process**: Dual build system (Vite for frontend, esbuild for backend)
-
-### Key Architectural Decisions
-
-**1. Monorepo Structure**
-- **Problem**: Managing frontend, backend, and shared code in a scalable way
-- **Solution**: Single repository with clear separation (`client/`, `server/`, `shared/`)
-- **Pros**: Simplified dependency management, shared types, single deployment
-- **Cons**: Requires careful build configuration
-
-**2. Type-Safe Schema Sharing**
-- **Problem**: Keeping frontend and backend data models in sync
-- **Solution**: Shared schema definitions in `shared/schema.ts` using Drizzle ORM and Zod
-- **Pros**: Single source of truth, compile-time type checking, runtime validation
-- **Cons**: Schema changes require rebuilding both frontend and backend
-
-**3. Component-First UI Design**
-- **Problem**: Building consistent, accessible UI quickly
-- **Solution**: shadcn/ui components with Tailwind CSS
-- **Pros**: Highly customizable, accessible by default, no runtime bundle overhead
-- **Cons**: Components are copied into project (not installed as dependency)
-
-**4. In-Memory Storage with Interface**
-- **Problem**: Need to develop quickly but prepare for database integration
-- **Solution**: Storage interface with in-memory implementation
-- **Pros**: Fast development iteration, easy testing, clear migration path
-- **Cons**: Data doesn't persist, not suitable for production
-
-**5. Server-Side Rendering Strategy**
-- **Problem**: Balancing development speed with production performance
-- **Solution**: Vite middleware in development, static SPA in production
-- **Pros**: Fast HMR in dev, optimized bundle in production
-- **Cons**: Requires different serving strategies per environment
 
 ## External Dependencies
 
